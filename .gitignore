@@ -1,0 +1,8 @@
+**.gitkeep
+downstream
+upstream
+ca/*.pem
+ca/index.txt*
+ca/private
+ca/certs
+ca/serial*
