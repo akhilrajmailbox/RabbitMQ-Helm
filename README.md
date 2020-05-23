@@ -6,8 +6,8 @@ RabbitMQ Deployment on K8s
 
 ```
 kubectl create ns rabbitmq
-helm repo add ar-repo https://akhilrajmailbox.github.io/rabbitmq-helm/charts
-helm install rabbitmq ed-repo/rabbitmq -n rabbitmq
+helm repo add ar-rabbitmq https://akhilrajmailbox.github.io/rabbitmq-helm/charts
+helm install rabbitmq ar-rabbitmq/rabbitmq -n rabbitmq
 ```
 
 The command deploys the RabbitMQ on the Kubernetes cluster in the default configuration. The [Configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -17,13 +17,13 @@ The command deploys the RabbitMQ on the Kubernetes cluster in the default config
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
 
 ```
-helm install rabbitmq ed-repo/rabbitmq -n rabbitmq --set service.port=5672
+helm install rabbitmq ar-rabbitmq/rabbitmq -n rabbitmq --set service.port=5672
 ```
 
 Alternatively, a YAML file can be provided while installing the chart. This file specifies values to override those provided in the default `values.yaml`. For example,
 
 ```
-helm install rabbitmq ed-repo/rabbitmq -n rabbitmq -f my-values.yaml
+helm install rabbitmq ar-rabbitmq/rabbitmq -n rabbitmq -f my-values.yaml
 ```
 
 ## Updating the chart
@@ -31,20 +31,33 @@ helm install rabbitmq ed-repo/rabbitmq -n rabbitmq -f my-values.yaml
 To update the chart run:
 
 ```
-helm upgrade rabbitmq ed-repo/rabbitmq -n rabbitmq -f my-values.yaml
+helm upgrade rabbitmq ar-rabbitmq/rabbitmq -n rabbitmq -f my-values.yaml
 ```
 
 ## Uninstalling the Chart
 
 To uninstall/delete the `rabbitmq` deployment:
 
+The command removes all the Kubernetes components associated with the chart and deletes the release.
+
 ```
 helm uninstall rabbitmq -n rabbitmq
 ```
 
-The command removes all the Kubernetes components associated with the chart and deletes the release.
+## Configure the tls for the rabbitmq server
 
+**Note :** *use the `federation.sh` script to create the certificates under `upstream` and `downstream` folder*
 
+*`upstream` : cacerts, server key and certs for the server machine / upstream server*
+
+*`downstream` : cacerts, client key and certs for the client machine / downstream server*
+
+```
+./federation.sh -o ca
+./federation.sh -o upstream
+./federation.sh -o downstream
+kubectl -n rabbitmq create secret generic rabbitmq-cert --from-file=./upstream
+```
 
 ## Configuration
 
