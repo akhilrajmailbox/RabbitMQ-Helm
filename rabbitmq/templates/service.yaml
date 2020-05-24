@@ -14,5 +14,8 @@ spec:
     - name: amqp
       port: {{ .Values.service.port }}
       targetPort: amqp
+    - name: management
+      port: {{ .Values.service.managementPort }}
+      targetPort: management
   selector:
     name: test
