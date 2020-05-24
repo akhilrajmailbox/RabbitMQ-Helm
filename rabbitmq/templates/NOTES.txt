@@ -3,6 +3,6 @@
 
 Credentials:
 
-    echo "Username      : {{ .Values.rabbitmq.username }} default : rabbitmq"
+    echo "Username      : {{ .Values.rabbitmq.username }} default : rabbitmq {{ include "rabbitmq.fullname" . }} "
     echo "Password      : {{ .Values.rabbitmq.password }} default : MySecurePass"
     echo "ErLang Cookie : {{ .Values.rabbitmq.erlangCookie }} default : erlang-cookie=c-is-for-cookie-thats-good-enough-for-me"
