@@ -3,8 +3,44 @@
 
 Credentials:
 
-    echo "Username      : {{ .Values.rabbitmq.username }} default : rabbitmq"
-    echo "Password      : {{ .Values.rabbitmq.password }} default : MySecurePass"
-    echo "ErLang Cookie : {{ .Values.rabbitmq.erlangCookie }} default : erlang-cookie=c-is-for-cookie-thats-good-enough-for-me"
+    echo "Username      : {{ .Values.rabbitmq.username }} default value : rabbitmq"
+    echo "Password      : {{ .Values.rabbitmq.password }} default value : MySecurePass"
+    echo "ErLang Cookie : {{ .Values.rabbitmq.erlangCookie }} default value : erlang-cookie=c-is-for-cookie-thats-good-enough-for-me"
 
 To access for outside the cluster, perform the following steps:
+
+{{- if contains "NodePort" .Values.service.type }}
+
+    export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
+
+Obtain the NodePort IP and ports:
+
+    {{- if .Values.rabbitmq.tls.enabled }}
+
+    export NODE_PORT_AMQPS=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[2].nodePort}" services {{ include "rabbitmq.fullname" . }})
+    export NODE_PORT_MANAGEMENT_SSL=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[3].nodePort}" services {{ include "rabbitmq.fullname" . }})
+
+To Access the RabbitMQ AMQPS port:
+
+    echo "URL : amqps://$NODE_IP:$NODE_PORT_AMQPS/"
+
+To Access the RabbitMQ Management interface SSL:
+
+    echo "URL : https://$NODE_IP:$NODE_PORT_MANAGEMENT_SSL/"
+
+    {{- else }}
+
+    export NODE_PORT_AMQP=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "rabbitmq.fullname" . }})
+    export NODE_PORT_MANAGEMENT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[1].nodePort}" services {{ include "rabbitmq.fullname" . }})
+
+To Access the RabbitMQ AMQP port:
+
+    echo "URL : amqp://$NODE_IP:$NODE_PORT_AMQP/"
+
+To Access the RabbitMQ Management interface:
+
+    echo "URL : http://$NODE_IP:$NODE_PORT_MANAGEMENT/"
+
+    {{- end }}
+
+{{- end }}
