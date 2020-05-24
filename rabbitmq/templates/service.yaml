@@ -6,7 +6,7 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - name: amqp
-      port: 8080
+      port: {{ .Values.service.port }}
       targetPort: amqp
   selector:
-    app: test
+    app: tye
