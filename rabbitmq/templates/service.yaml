@@ -26,4 +26,4 @@ spec:
       targetPort: management-ssl
     {{- end }}
   selector:
-    name: test
+{{ include "labels.standard" . | indent 4 }
