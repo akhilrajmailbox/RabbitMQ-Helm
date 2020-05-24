@@ -33,7 +33,7 @@ service:
     tlsPort: 5671
     managementPort: 15672
     tlsmanagementPort: 15671
-    annotations: haha
+    # annotations:
 
 # persistence volume details
 persistence:
@@ -52,12 +52,12 @@ podDisruptionBudget:
 
 # resources for the pods
 resources:
-  requests:
-    memory: 256Mi
-    cpu: 100m
-#   limit:
-#     memory: 256Mi
-#     cpu: 100m
+    requests:
+        memory: 256Mi
+        cpu: 100m
+    # limit:
+    #     memory: 256Mi
+    #     cpu: 100m
 
 # networkPolicy for security
 networkPolicy:
@@ -65,14 +65,14 @@ networkPolicy:
     ## ref: https://kubernetes.io/docs/concepts/services-networking/network-policies/
     ##
     enabled: false
-  
+
     ## The Policy model to apply. When set to false, only pods with the correct
     ## client label will have network access to the port RabbitMQ is listening
     ## on. When true, RabbitMQ will accept connections from any source
     ## (with the correct destination port).
     ##
     allowExternal: true
-  
+
     ## Additional NetworkPolicy Ingress "from" rules to set. Note that all rules are OR-ed.
     ##
     # additionalRules:

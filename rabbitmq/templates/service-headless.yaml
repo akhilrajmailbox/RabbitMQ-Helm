@@ -1,15 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "rabbitmq.fullname" . }}
+  name: {{ include "rabbitmq.fullname" . }}-headless
   labels:
     {{ include "labels.standard" . | indent 4 }}
-  annotations: 
-    {{- with .Values.service.annotations }}
-    {{ toYaml . | indent 4 }}
-    {{- end }}
 spec:
-  type: {{ .Values.service.type }}
+  clusterIP: None
   ports:
     - name: amqp
       port: {{ .Values.service.port }}
