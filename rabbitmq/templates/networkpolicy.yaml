@@ -8,7 +8,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      {{ include "labels.standard" . | indent 4 }}
+      {{ include "labels.standard" . | indent 6 }}
   ingress:
     # Allow inbound connections
     - ports:
