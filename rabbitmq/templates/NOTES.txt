@@ -1,8 +1,3 @@
-
-
-1. Credentials:
-
-
 1. Get the application URL by running these commands:
 
 {{- if contains "ClusterIP" .Values.service.type }}
