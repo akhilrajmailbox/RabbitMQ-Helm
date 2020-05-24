@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: {{ include "rabbitmq.fullname" . }}
   labels:
-    {{ include "labels.standard" . | indent 4 }}
+{{ include "labels.standard" . | indent 4 }}
 spec:
   serviceName: {{ include "rabbitmq.fullname" . }}
   {{- if .Values.cluster.enabled }}
@@ -13,11 +13,11 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      {{ include "labels.standard" . | indent 4 }}
+{{ include "labels.standard" . | indent 4 }}
   template:
     metadata:
       labels:
-        {{ include "labels.standard" . | indent 4 }}
+{{ include "labels.standard" . | indent 4 }}
     spec:
       {{- if .Values.priorityClassName }}
       priorityClassName: "{{ .Values.priorityClassName }}"
