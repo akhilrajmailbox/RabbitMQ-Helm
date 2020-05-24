@@ -17,5 +17,13 @@ spec:
     - name: management
       port: {{ .Values.service.managementPort }}
       targetPort: management
+    {{- if .Values.rabbitmq.tls.enabled }}
+    - name: amqp-ssl
+      port: {{ .Values.service.tlsPort }}
+      targetPort: amqp-ssl
+    - name: management-ssl
+      port: {{ .Values.service.tlsmanagementPort }}
+      targetPort: management-ssl
+    {{- end }}
   selector:
     name: test
