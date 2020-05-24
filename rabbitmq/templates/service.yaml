@@ -11,6 +11,9 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
+    - name: epmd
+      port: 4369
+      targetPort: epmd
     - name: amqp
       port: {{ .Values.service.port }}
       targetPort: amqp

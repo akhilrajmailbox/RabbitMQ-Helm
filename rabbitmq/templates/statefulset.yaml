@@ -87,15 +87,15 @@ spec:
             fieldRef:
               fieldPath: metadata.namespace
         ports:
+          - name: epmd
+            containerPort: 4369
           - name: amqp
             containerPort: {{ .Values.service.port }}
-          {{- if .Values.tls.enabled }}
-          - name: amqp-ssl
-            containerPort: {{ .Values.service.tlsPort }}
-          {{- end }}
           - name: management
             containerPort: {{ .Values.service.managementPort }}
           {{- if .Values.tls.enabled }}
+          - name: amqp-ssl
+            containerPort: {{ .Values.service.tlsPort }}
           - name: management-ssl
             containerPort: {{ .Values.service.tlsmanagementPort }}
           {{- end }}
