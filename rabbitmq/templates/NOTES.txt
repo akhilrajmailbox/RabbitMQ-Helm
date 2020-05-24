@@ -1,7 +1,11 @@
-Credentials:
 
-    echo "Username      : {{ .Values.rabbitmq.username }} default : rabbitmq"
-    echo "Password      : {{ .Values.rabbitmq.password }} default : MySecurePass"
-    echo "ErLang Cookie :  {{ .Values.rabbitmq.erlangCookie }} default : erlang-cookie=c-is-for-cookie-thats-good-enough-for-me"
 
-To access for outside the cluster, perform the following steps:
+1. Credentials:
+
+
+1. Get the application URL by running these commands:
+
+{{- if contains "ClusterIP" .Values.service.type }}
+  export SERVICE_URL=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "dind.fullname" . }} -o jsonpath='{.metadata.name}')
+  echo "You have to configure your consumer with : http://${SERVICE_URL}:{{ $.Values.service.port }}"
+{{- end }}
