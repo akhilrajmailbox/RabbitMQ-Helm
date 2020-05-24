@@ -1,10 +1,7 @@
-
-** Please be patient while the chart is being deployed **
-
 Credentials:
 
-    echo "Username      :  default : rabbitmq"
-    echo "Password      :  default : MySecurePass"
-    echo "ErLang Cookie :   default : erlang-cookie=c-is-for-cookie-thats-good-enough-for-me"
+    echo "Username      : {{ .Values.rabbitmq.username }} default : rabbitmq"
+    echo "Password      : {{ .Values.rabbitmq.password }} default : MySecurePass"
+    echo "ErLang Cookie :  {{ .Values.rabbitmq.erlangCookie }} default : erlang-cookie=c-is-for-cookie-thats-good-enough-for-me"
 
 To access for outside the cluster, perform the following steps:
