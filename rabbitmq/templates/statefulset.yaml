@@ -13,8 +13,7 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      app: {{ include "rabbitmq.name" . }}
-      release: {{ .Release.Name }}
+{{ include "labels.standard" . | indent 6 }}
   template:
     metadata:
       labels:
