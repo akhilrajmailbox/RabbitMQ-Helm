@@ -13,9 +13,9 @@ spec:
   ports:
     - name: amqp
       port: {{ .Values.service.port }}
-      targetPort: amqp
+      targetPort: 5672
     - name: management
       port: {{ .Values.service.managementPort }}
-      targetPort: management
+      targetPort: 15672
   selector:
 {{ include "labels.standard" . | indent 4 }
