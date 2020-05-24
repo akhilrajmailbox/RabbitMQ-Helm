@@ -6,7 +6,7 @@ RabbitMQ Deployment on K8s
 
 ```
 kubectl create ns rabbitmq
-helm repo add ar-rabbitmq https://akhilrajmailbox.github.io/rabbitmq-helm/charts
+helm repo add ar-rabbitmq https://akhilrajmailbox.github.io/RabbitMQ-Helm/charts
 helm install rabbitmq ar-rabbitmq/rabbitmq -n rabbitmq
 ```
 
