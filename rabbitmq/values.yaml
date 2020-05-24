@@ -33,7 +33,7 @@ service:
     tlsPort: 5671
     managementPort: 15672
     tlsmanagementPort: 15671
-    # annotations:
+    annotations: {}
 
 # persistence volume details
 persistence:
