@@ -80,7 +80,6 @@ spec:
           - secretRef:
               name: {{ include "rabbitmq.fullname" . }}-secret
         {{- if .Values.tls.enabled }}
-        envFrom:
           - configMapRef:
               name: {{ include "rabbitmq.fullname" . }}-cm
         {{- end }}
