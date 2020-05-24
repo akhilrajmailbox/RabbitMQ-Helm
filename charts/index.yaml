@@ -3,7 +3,7 @@ entries:
   dind:
   - apiVersion: v1
     appVersion: stable-dind
-    created: "2020-05-24T13:38:08.256395+05:30"
+    created: "2020-05-24T13:42:28.171146+05:30"
     description: DinD Deployment chart
     digest: a13a747ca700c1dbf688a70328754dd30f2a92a743a713df629e3464ecceec37
     keywords:
@@ -17,9 +17,9 @@ entries:
   rabbitmq:
   - apiVersion: v1
     appVersion: 3.8.0
-    created: "2020-05-24T13:38:08.256973+05:30"
+    created: "2020-05-24T13:42:28.171656+05:30"
     description: rabbitmq Deployment chart
-    digest: fa9b3393bef1d78793f2b0d01cc0156cb22e85fa38e0b5e9b60b2b93aa7d3afb
+    digest: f2af27bbdc0e12ccb8ffad8fa5e8394531358a613ca30b69673e2850b04671df
     keywords:
     - rabbitmq
     - amqp
@@ -28,4 +28,4 @@ entries:
     urls:
     - rabbitmq-1.0.0.tgz
     version: 1.0.0
-generated: "2020-05-24T13:38:08.251946+05:30"
+generated: "2020-05-24T13:42:28.169569+05:30"
