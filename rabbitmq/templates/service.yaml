@@ -9,4 +9,4 @@ spec:
       port: {{ .Values.service.port }}
       targetPort: amqp
   selector:
-    app: tye
+{{ include "labels.standard" . | indent 4 }
