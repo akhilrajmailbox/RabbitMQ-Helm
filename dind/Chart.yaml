@@ -1,9 +1,0 @@
-apiVersion: v1
-description: DinD Deployment chart
-name: dind
-version: 1.0.0
-appVersion: stable-dind
-keywords:
-  - easydeploy
-  - dind
-  - Kubernetes
