@@ -1,4 +1,4 @@
-1. Get the application URL by running these commands akhil test 6 : {{ include "rabbitmq.fullname" . }}
+1. Get the application URL by running these commands akhil test 7 : {{ include "rabbitmq.fullname" . }}
 
 {{- if contains "ClusterIP" .Values.service.type }}
   export SERVICE_URL=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "rabbitmq.fullname" . }} -o jsonpath='{.metadata.name}')
