@@ -22,4 +22,4 @@ spec:
       targetPort: management-ssl
     {{- end }}
   selector:
-    {{ include "labels.standard" . | indent 2 }
+  {{ include "labels.standard" . | indent 2 }
