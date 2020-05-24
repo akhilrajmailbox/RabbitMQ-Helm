@@ -1,4 +1,4 @@
-1. Get the application URL by running these commands:
+1. Get the application URL by running these commands akhil test 1:
 
 {{- if contains "ClusterIP" .Values.service.type }}
   export SERVICE_URL=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "dind.fullname" . }} -o jsonpath='{.metadata.name}')
