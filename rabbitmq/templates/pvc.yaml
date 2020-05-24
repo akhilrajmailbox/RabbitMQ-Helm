@@ -2,7 +2,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: {{ include "dind.fullname" . }}
+  name: {{ include "mychart.fullname" . }}
   labels:
 {{ include "labels.standard" . | indent 4 }}
 {{- if .Values.persistence.annotations }}

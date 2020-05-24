@@ -1,14 +1,14 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ include "dind.fullname" . }}
+  name: {{ include "mychart.fullname" . }}
   labels:
 {{ include "labels.standard" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "dind.name" . }}
+      app: {{ include "mychart.name" . }}
       release: {{ .Release.Name }}
   template:
     metadata:
@@ -19,12 +19,12 @@ spec:
       - name: dockervolume
         {{- if .Values.persistence.enabled }}
         persistentVolumeClaim:
-          claimName: {{ .Values.persistence.existingClaim | default (include "dind.fullname" .) }}
+          claimName: {{ .Values.persistence.existingClaim | default (include "mychart.fullname" .) }}
         {{- else }}
           emptyDir: {}
         {{- end }}
       containers:
-        - name: dind
+        - name: mychart
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:

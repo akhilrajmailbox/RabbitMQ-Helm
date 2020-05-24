@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "dind.fullname" . }}
+  name: {{ include "mychart.fullname" . }}
   labels:
 {{ include "labels.standard" . | indent 4 }}
 spec:
@@ -10,7 +10,7 @@ spec:
     - port: {{ .Values.service.port }}
       targetPort: 2375
       protocol: TCP
-      name: dindport
+      name: mychartport
   selector:
-    app: {{ include "dind.name" . }}
+    app: {{ include "mychart.name" . }}
     release: {{ .Release.Name }}
