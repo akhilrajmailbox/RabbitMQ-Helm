@@ -15,4 +15,4 @@ spec:
       port: {{ .Values.service.port }}
       targetPort: amqp
   selector:
-{{ include "labels.standard" . | indent 4 }
+    name: test
