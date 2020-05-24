@@ -1,29 +1,29 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ template "rabbitmq.fullname" . }}
-  labels:
-    {{ include "labels.standard" . | indent 4 }}
-  annotations: 
-    {{- with .Values.service.annotations }}
-    {{ toYaml . | indent 4 }}
-    {{- end }}
-spec:
-  type: {{ .Values.service.type }}
-  ports:
-    - name: amqp
-      port: {{ .Values.service.port }}
-      targetPort: amqp
-    - name: management
-      port: {{ .Values.service.managementPort }}
-      targetPort: management
-    {{- if .Values.rabbitmq.tls.enabled }}
-    - name: amqp-ssl
-      port: {{ .Values.service.tlsPort }}
-      targetPort: amqp-ssl
-    - name: management-ssl
-      port: {{ .Values.service.tlsmanagementPort }}
-      targetPort: management-ssl
-    {{- end }}
-  selector:
-    {{ include "labels.standard" . | indent 4 }
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: {{ template "rabbitmq.fullname" . }}
+#   labels:
+#     {{ include "labels.standard" . | indent 4 }}
+#   annotations: 
+#     {{- with .Values.service.annotations }}
+#     {{ toYaml . | indent 4 }}
+#     {{- end }}
+# spec:
+#   type: {{ .Values.service.type }}
+#   ports:
+#     - name: amqp
+#       port: {{ .Values.service.port }}
+#       targetPort: amqp
+#     - name: management
+#       port: {{ .Values.service.managementPort }}
+#       targetPort: management
+#     {{- if .Values.rabbitmq.tls.enabled }}
+#     - name: amqp-ssl
+#       port: {{ .Values.service.tlsPort }}
+#       targetPort: amqp-ssl
+#     - name: management-ssl
+#       port: {{ .Values.service.tlsmanagementPort }}
+#       targetPort: management-ssl
+#     {{- end }}
+#   selector:
+#     {{ include "labels.standard" . | indent 4 }
