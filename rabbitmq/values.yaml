@@ -40,7 +40,7 @@ persistence:
     enabled: true
     name: rabbitmq-pvc
     accessMode: ReadWriteOnce
-    storageClass: "-"
+    storageClass: ""
     size: 10Gi
 
 # podDisruptionBudget for the pods
