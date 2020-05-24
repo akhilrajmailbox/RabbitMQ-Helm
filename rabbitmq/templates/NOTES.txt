@@ -9,50 +9,17 @@ Credentials:
 
 To access for outside the cluster, perform the following steps:
 
-{{- if contains "NodePortqqqqqqqq" .Values.service.type }}
 
-    export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
-
-Obtain the NodePort IP and ports:
-
-    {{- if .Values.rabbitmq.tls.enabled }}
-
-    export NODE_PORT_AMQPS=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[2].nodePort}" services {{ include "rabbitmq.fullname" . }})
-    export NODE_PORT_MANAGEMENT_SSL=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[3].nodePort}" services {{ include "rabbitmq.fullname" . }})
-
-To Access the RabbitMQ AMQPS port:
-
-    echo "URL : amqps://$NODE_IP:$NODE_PORT_AMQPS/"
-
-To Access the RabbitMQ Management interface SSL:
-
-    echo "URL : https://$NODE_IP:$NODE_PORT_MANAGEMENT_SSL/"
-
-    {{- else }}
-
-    export NODE_PORT_AMQP=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "rabbitmq.fullname" . }})
-    export NODE_PORT_MANAGEMENT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[1].nodePort}" services {{ include "rabbitmq.fullname" . }})
-
-To Access the RabbitMQ AMQP port:
-
-    echo "URL : amqp://$NODE_IP:$NODE_PORT_AMQP/"
-
-To Access the RabbitMQ Management interface:
-
-    echo "URL : http://$NODE_IP:$NODE_PORT_MANAGEMENT/"
-
-    {{- end }}
-
-{{- else if contains "LoadBalancerqqqqqqqq" .Values.service.type }}
+{{- if contains "LoadBalancer" .Values.service.type }}
 
 Obtain the LoadBalancer IP:
 
     NOTE: It may take a few minutes for the LoadBalancer IP to be available.
     Watch the status with: 'kubectl get svc --namespace {{ .Release.Namespace }} -w {{ include "rabbitmq.fullname" . }}'
 
-    export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "rabbitmq.fullname" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
+    export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "rabbitmq.fullname" . }} -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
 
-    {{- if .Values.rabbitmq.tls.enabled }}
+    {{- if .Values.tls.enabled }}
 
 To Access the RabbitMQ AMQPS port:
 
@@ -74,9 +41,9 @@ To Access the RabbitMQ Management interface:
 
     {{- end }}
 
-{{- else if contains "ClusterIPqqqqqqqq"  .Values.service.type }}
+{{- else if contains "ClusterIP"  .Values.service.type }}
 
-    {{- if .Values.rabbitmq.tls.enabled }}
+    {{- if .Values.tls.enabled }}
 
 To Access the RabbitMQ AMQPS port:
 
