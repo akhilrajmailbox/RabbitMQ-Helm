@@ -1,9 +1,23 @@
 apiVersion: v1
 entries:
+  dind:
+  - apiVersion: v1
+    appVersion: stable-dind
+    created: "2020-05-24T13:21:35.119033+05:30"
+    description: DinD Deployment chart
+    digest: a13a747ca700c1dbf688a70328754dd30f2a92a743a713df629e3464ecceec37
+    keywords:
+    - easydeploy
+    - dind
+    - Kubernetes
+    name: dind
+    urls:
+    - dind-1.0.0.tgz
+    version: 1.0.0
   rabbitmq:
   - apiVersion: v1
     appVersion: 3.8.0
-    created: "2020-05-24T13:08:28.681826+05:30"
+    created: "2020-05-24T13:21:35.128332+05:30"
     description: rabbitmq Deployment chart
     digest: 072cce3c1a58b351c45bd6534bf1c1e56a700a539dcf4476e244a0f2d9560b30
     keywords:
@@ -14,4 +28,4 @@ entries:
     urls:
     - rabbitmq-1.0.0.tgz
     version: 1.0.0
-generated: "2020-05-24T13:08:28.680676+05:30"
+generated: "2020-05-24T13:21:35.11481+05:30"
