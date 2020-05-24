@@ -3,9 +3,9 @@ entries:
   rabbitmq:
   - apiVersion: v1
     appVersion: 3.8.0
-    created: "2020-05-24T19:58:13.243799+05:30"
+    created: "2020-05-24T20:01:38.901848+05:30"
     description: rabbitmq Deployment chart
-    digest: b41d8a4d795b0fb281fc9c51055f115f775c7cf1c9f8ae2b594cdca092cb7b5d
+    digest: a26f610a790942a55b59f52dd203888e11420ee6b7b85ef05416835db8583f5b
     keywords:
     - rabbitmq
     - amqp
@@ -14,4 +14,4 @@ entries:
     urls:
     - rabbitmq-1.0.0.tgz
     version: 1.0.0
-generated: "2020-05-24T19:58:13.241382+05:30"
+generated: "2020-05-24T20:01:38.89957+05:30"
