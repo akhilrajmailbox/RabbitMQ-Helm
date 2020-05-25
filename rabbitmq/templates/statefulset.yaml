@@ -92,12 +92,12 @@ spec:
         - name: RABBITMQ_CTL_ERL_ARGS
           value: "-proto_dist inet_tls"
         {{- end }}
-        - name: HOSTNAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        - name: RABBITMQ_NODENAME
-          value: rabbit@$(HOSTNAME).rabbitmq.$(NAMESPACE).svc.cluster.local
+        # - name: HOSTNAME
+        #   valueFrom:
+        #     fieldRef:
+        #       fieldPath: metadata.name
+        # - name: RABBITMQ_NODENAME
+        #   value: "rabbit@$(HOSTNAME).rabbitmq.$(NAMESPACE).svc.cluster.local"
         # - name: RABBITMQ_USE_LONGNAME
         #   value: "true"
         ports:
@@ -107,6 +107,8 @@ spec:
             containerPort: {{ .Values.service.port }}
           - name: management
             containerPort: {{ .Values.service.managementPort }}
+          - name: dist
+            containerPort: {{ .Values.service.distPort }}
           {{- if .Values.tls.enabled }}
           - name: amqp-ssl
             containerPort: {{ .Values.service.tlsPort }}

@@ -29,6 +29,7 @@ tls:
 # port number and details
 service:
     type: LoadBalancer
+    distPort: 25672
     port: 5672
     tlsPort: 5671
     managementPort: 15672
