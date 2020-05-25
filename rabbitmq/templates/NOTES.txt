@@ -10,7 +10,7 @@ Credentials:
 To access for outside the cluster, perform the following steps:
 
 
-{{- if contains "LoadBalancer" .Values.service.type }}
+{{- if contains "LoadBalancerqqqqqq" .Values.service.type }}
 
 Obtain the LoadBalancer IP:
 
@@ -41,7 +41,7 @@ To Access the RabbitMQ Management interface:
 
     {{- end }}
 
-{{- else if contains "ClusterIP"  .Values.service.type }}
+{{- else if contains "ClusterIPqqqqqq"  .Values.service.type }}
 
     {{- if .Values.tls.enabled }}
 
