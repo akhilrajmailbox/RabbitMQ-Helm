@@ -98,8 +98,8 @@ spec:
         #       fieldPath: metadata.name
         # - name: RABBITMQ_NODENAME
         #   value: "rabbit@$(HOSTNAME)"
-        - name: RABBITMQ_USE_LONGNAME
-          value: "true"
+        # - name: RABBITMQ_USE_LONGNAME
+        #   value: "true"
         ports:
           - name: epmd
             containerPort: 4369
