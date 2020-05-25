@@ -93,7 +93,7 @@ spec:
             fieldRef:
               fieldPath: metadata.namespace
         - name: RABBITMQ_NODENAME
-          value: "rabbit@$(HOSTNAME).rabbitmq.$(NAMESPACE).svc.cluster.local"
+          value: rabbit@$(HOSTNAME)
         ports:
           - name: epmd
             containerPort: 4369
