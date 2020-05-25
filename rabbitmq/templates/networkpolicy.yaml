@@ -23,7 +23,7 @@ spec:
               {{ include "rabbitmq.fullname" . }}-client: "true"
         - podSelector:
             matchLabels:
-              {{ include "labels.standard" . | indent 4 }}
+{{ include "labels.standard" . | indent 14 }}
         {{- with .Values.networkPolicy.additionalRules }}
 {{ toYaml . | indent 8 }}
         {{- end }}
