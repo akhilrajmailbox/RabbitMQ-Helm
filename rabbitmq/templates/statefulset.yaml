@@ -92,12 +92,12 @@ spec:
         - name: RABBITMQ_CTL_ERL_ARGS
           value: "-proto_dist inet_tls"
         {{- end }}
-        # - name: HOSTNAME
-        #   valueFrom:
-        #     fieldRef:
-        #       fieldPath: metadata.name
-        # - name: RABBITMQ_NODENAME
-        #   value: "rabbit@$(HOSTNAME)"
+        - name: HOSTNAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: RABBITMQ_NODENAME
+          value: rabbit@$(HOSTNAME).rabbitmq.$(NAMESPACE).svc.cluster.local
         # - name: RABBITMQ_USE_LONGNAME
         #   value: "true"
         ports:
