@@ -3,9 +3,9 @@
 
 Credentials:
 
-    echo "Username      : {{ .Values.rabbitmq.username }} default value : rabbitmq"
-    echo "Password      : {{ .Values.rabbitmq.password }} default value : MySecurePass"
-    echo "ErLang Cookie : {{ .Values.rabbitmq.erlangCookie }} default value : erlang-cookie=c-is-for-cookie-thats-good-enough-for-me"
+    echo "Username      : {{ .Values.rabbitmq.username }}"
+    echo "Password      : {{ .Values.rabbitmq.password }}"
+    echo "ErLang Cookie : {{ .Values.rabbitmq.erlangCookie }}"
 
 To access for outside the cluster, perform the following steps:
 
