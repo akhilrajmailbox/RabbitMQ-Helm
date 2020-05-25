@@ -84,18 +84,20 @@ spec:
               name: {{ include "rabbitmq.fullname" . }}-cm
         {{- end }}
         env:
-        - name: HOSTNAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
+        # - name: HOSTNAME
+        #   valueFrom:
+        #     fieldRef:
+        #       fieldPath: metadata.name
         - name: NAMESPACE
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
         # - name: RABBITMQ_NODENAME
         #   value: "rabbit@$(HOSTNAME)"
-        - name: RABBITMQ_USE_LONGNAME
-          value: "true"
+        # - name: RABBITMQ_USE_LONGNAME
+        #   value: "true"
+        - name: RABBITMQ_CTL_ERL_ARGS
+          value: "-proto_dist inet_tls"
         ports:
           - name: epmd
             containerPort: 4369
