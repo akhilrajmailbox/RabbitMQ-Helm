@@ -90,7 +90,7 @@ spec:
               fieldPath: metadata.namespace
         {{- if .Values.tls.enabled }}
         - name: RABBITMQ_CTL_ERL_ARGS
-          value: "-proto_dist inet_tls inet6_tcp"
+          value: "-proto_dist inet_tls"
         {{- end }}
         # - name: HOSTNAME
         #   valueFrom:
