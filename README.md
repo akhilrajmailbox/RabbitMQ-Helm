@@ -110,7 +110,7 @@ The following table lists the configurable parameters of the Hyperledger Fabric 
 * exchange and queue need to be same in both upstream and downstream server
 
 
-### Upstream Server
+### Upstream Server & Downstream Server
 
 #### add one rabbitmq user
 ```
@@ -150,7 +150,7 @@ rabbitmqctl set_policy federation-policy ".*{FEDERATION_NAME}.*" '{"federation-u
 
 ### Example configuration
 
-### Upstream Server
+### Upstream Server & Downstream Server
 ```
 rabbitmqctl add_user test_user TestUserPass
 rabbitmqctl set_user_tags test_user management
