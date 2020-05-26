@@ -34,6 +34,15 @@ To update the chart run:
 helm upgrade rabbitmq ar-rabbitmq/rabbitmq -n rabbitmq -f my-values.yaml
 ```
 
+## RabbitMQ Details
+
+```
+RABBITMQ_DEFAULT_USER  =  kubectl -n rabbitmq get secret rabbitmq-secret -o jsonpath="{.data.RABBITMQ_DEFAULT_USER}"  | base64 -d
+RABBITMQ_DEFAULT_PASS = kubectl -n rabbitmq get secret rabbitmq-secret -o jsonpath="{.data.RABBITMQ_DEFAULT_PASS}"  | base64 -d
+SERVICE_IP = kubectl get svc --namespace rabbitmq rabbitmq -o jsonpath="{.status.loadBalancer.ingress[0].ip}"
+```
+
+
 ## Uninstalling the Chart
 
 To uninstall/delete the `rabbitmq` deployment:
