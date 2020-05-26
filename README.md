@@ -102,10 +102,13 @@ The following table lists the configurable parameters of the Hyperledger Fabric 
 
 
 
-
-
-
 ## RabbitMQ - Federation Plugin Configuration
+
+**Note :**
+
+* vhost and user can be different
+* exchange and queue need to be same in both upstream and downstream server
+
 
 ### Upstream Server
 
@@ -136,11 +139,7 @@ rabbitmqadmin -s -H localhost -P 15671 -u {USER_NAME} -p {SECURE_PASS} -V {VIRTU
 
 #### create federation-upstream
 ```
-rabbitmqctl set_parameter federation-upstream {FEDERATION_NAME} '{"uri":"amqps://{USER_NAME}:{SECURE_PASS}@myhost:5671?cacertfile=/downstream/cacert.pem
-  &certfile=/downstream/cert.pem
-  &keyfile=/downstream/key.pem
-  &verify=verify_peer
-  &server_name_indication={HOSTNAME}","expires":3600000}' -p {VIRTUAL_HOST} 
+rabbitmqctl set_parameter federation-upstream {FEDERATION_NAME} '{"uri":"amqps://{USER_NAME}:{SECURE_PASS}@${RABBITMQ_HOST}:5671?cacertfile=/downstream/cacert.pem&certfile=/downstream/cert.pem&keyfile=/downstream/key.pem&verify=verify_peer&server_name_indication={RABBITMQ_HOST}","expires":3600000}' -p {VIRTUAL_HOST} 
 ```
 
 #### create policy
@@ -153,21 +152,21 @@ rabbitmqctl set_policy federation-policy ".*{FEDERATION_NAME}.*" '{"federation-u
 
 ### Upstream Server
 ```
-rabbitmqctl add_user test_user1 TestUserPass
-rabbitmqctl set_user_tags test_user1 management
-rabbitmqctl add_vhost testvhost1
-rabbitmqctl set_permissions -p testvhost1 test_user1 ".*" ".*" ".*"
-rabbitmqctl set_permissions -p testvhost1 rabbitmq ".*" ".*" ".*"
-rabbitmqadmin -s -H localhost -P 15671 -u test_user1 -p TestUserPass -V testvhost1 declare exchange name=test_ex1 type=fanout -k
-rabbitmqadmin -s -H localhost -P 15671 -u test_user1 -p TestUserPass -V testvhost1 declare queue name=test_queue1 -k
-rabbitmqadmin -s -H localhost -P 15671 -u test_user1 -p TestUserPass -V testvhost1 declare binding source=test_ex1 destination=test_queue1 -k
+rabbitmqctl add_user test_user TestUserPass
+rabbitmqctl set_user_tags test_user management
+rabbitmqctl add_vhost testvhost
+rabbitmqctl set_permissions -p testvhost test_user ".*" ".*" ".*"
+rabbitmqctl set_permissions -p testvhost rabbitmq ".*" ".*" ".*"
+rabbitmqadmin -s -H localhost -P 15671 -u test_user -p TestUserPass -V testvhost declare exchange name=test_ex type=fanout -k
+rabbitmqadmin -s -H localhost -P 15671 -u test_user -p TestUserPass -V testvhost declare queue name=test_queue -k
+rabbitmqadmin -s -H localhost -P 15671 -u test_user -p TestUserPass -V testvhost declare binding source=test_ex destination=test_queue -k
 ```
 
 ### Downstream Server
 ```
-rabbitmqctl set_parameter federation-upstream test_fed_name '{"uri":"amqps://test_user1:TestUserPass@upstream:5671/testvhost1?cacertfile=/downstream/ca_certificate.pem&certfile=/downstream/client_certificate.pem&keyfile=/downstream/private_key.pem&verify=verify_peer&server_name_indication=upstream","expires":3600000}' -p testvhost1 
+rabbitmqctl set_parameter federation-upstream test_fed_name '{"uri":"amqps://test_user:TestUserPass@upstream:5671/testvhost?cacertfile=/downstream/ca_certificate.pem&certfile=/downstream/client_certificate.pem&keyfile=/downstream/private_key.pem&verify=verify_peer&server_name_indication=upstream","expires":3600000}' -p testvhost 
 
-rabbitmqctl set_policy federation-policy ".*test_ex1.*" '{"federation-upstream-set":"all"}' --priority 0 --apply-to exchanges -p testvhost1 
+rabbitmqctl set_policy federation-policy ".*test_ex.*" '{"federation-upstream-set":"all"}' --priority 0 --apply-to exchanges -p testvhost 
 ```
 
 
