@@ -135,8 +135,6 @@ rabbitmqadmin -s -H localhost -P 15671 -u {USER_NAME} -p {SECURE_PASS} -V {VIRTU
 
 ### Downstream Server
 
-**Note :** All of the above configurations are completely optional for downstream server.
-
 #### create federation-upstream
 ```
 rabbitmqctl set_parameter federation-upstream {FEDERATION_NAME} '{"uri":"amqps://{USER_NAME}:{SECURE_PASS}@${RABBITMQ_HOST}:5671?cacertfile=/downstream/cacert.pem&certfile=/downstream/cert.pem&keyfile=/downstream/key.pem&verify=verify_peer&server_name_indication={RABBITMQ_HOST}","expires":3600000}' -p {VIRTUAL_HOST} 
