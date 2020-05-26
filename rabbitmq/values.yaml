@@ -19,7 +19,7 @@ rabbitmq:
 image:
     pullPolicy: Always
     repository: rabbitmq
-    tag: 3.8.0-management
+    tag: 3.8.0-management-alpine
 
 # enable this for use ssl configuration of rabbitmq
 tls:
