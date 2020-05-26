@@ -165,7 +165,7 @@ rabbitmqadmin -s -H localhost -P 15671 -u test_user1 -p TestUserPass -V testvhos
 
 ### Downstream Server
 ```
-rabbitmqctl set_parameter federation-upstream test_fed_name '{"uri":"amqps://test_user:TestUserPass@upstream:5671/testvhost1?cacertfile=/downstream/ca_certificate.pem&certfile=/downstream/client_certificate.pem&keyfile=/downstream/private_key.pem&verify=verify_peer&server_name_indication=upstream","expires":3600000}' -p testvhost1 
+rabbitmqctl set_parameter federation-upstream test_fed_name '{"uri":"amqps://test_user1:TestUserPass@upstream:5671/testvhost1?cacertfile=/downstream/ca_certificate.pem&certfile=/downstream/client_certificate.pem&keyfile=/downstream/private_key.pem&verify=verify_peer&server_name_indication=upstream","expires":3600000}' -p testvhost1 
 
 rabbitmqctl set_policy federation-policy ".*test_ex1.*" '{"federation-upstream-set":"all"}' --priority 0 --apply-to exchanges -p testvhost1 
 ```
