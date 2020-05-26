@@ -26,7 +26,7 @@ function ca_pem(){
     touch index.txt
 
     # Generate self-signed x509 certificate
-    openssl req -x509 -config openssl.cnf -newkey rsa:2048 -days 365 \
+    openssl req -x509 -config openssl.cnf -newkey rsa:2048 -days 1095 \
         -out ca_certificate.pem -outform PEM -subj /CN=MyRabbitMQCA/ -nodes
     cd ${P_W_D}
 }
